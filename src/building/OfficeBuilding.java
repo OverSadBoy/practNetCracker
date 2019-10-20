@@ -7,7 +7,9 @@ import lList.CLList;
 import lList.DoubleItem;
 import lList.Item;
 
-public class OfficeBuilding implements Building {
+import java.io.Serializable;
+
+public class OfficeBuilding implements Building, Serializable {
     private CDLList list;
 
     private DoubleItem getItem(int num) {
