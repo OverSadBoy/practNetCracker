@@ -1,6 +1,7 @@
 package building;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class Buildings {
    /* Записанные данные о здании представляет собой последовательность чисел,
@@ -12,41 +13,111 @@ public class Buildings {
     чтения данных из потока.
     Проверьте возможности всех реализованных методов, в качестве реальных потоков используя файловые потоки,
     а также потоки System.in и System.out.
-*/
+*/public static void outputBuilding (Building building, OutputStream out) throws IOException {
+       if (building != null) {
+           DataOutputStream dout = new DataOutputStream(out);
+           dout.writeInt(building.getFloorsNum());
+           dout.writeChars(" ");
+           for (int i = 0; i < building.getFloorsNum(); i++) {
+               dout.writeInt(building.getFloor(i).getRooms());
+               dout.writeChars(" ");
+               for (int j = 0; j < building.getFloor(i).getRooms(); j++) {
+                   dout.writeInt(building.getFloor(i).getSpace(j).getRoom());
+                   dout.writeChars(" ");
+                   dout.writeInt(building.getFloor(i).getSpace(j).getArea());
+                   dout.writeChars(" ");
+               }
+           }
+       }
+   }
 
-    public static void outputBuilding(Building building, OutputStream out) throws IOException {
-        // записи данных о здании в байтовый поток
-        out.write(building.getFloorsNum());
-        for (int i = 1; i <= building.getFloorsNum(); i++) {
-            Floor floor = building.getFloor(i);
-            out.write(floor.getSpaceNum());
-            out.write(floor.getRooms());
-            out.write(floor.getAreas());
+    public static Building inputBuilding (InputStream in) throws IOException {
+        DataInputStream din = new DataInputStream(in);
+        Building result = null;
+        if (din.available() > 0) {
+            int floorsNum = din.readInt();
+            din.skipBytes(2);
+            Floor[] floors = new OfficeFloor[floorsNum];
+            for (int i = 0; i < floorsNum; i++) {
+                int floorRoomsCount = din.readInt();
+                din.skipBytes(2);
+                Space[] offices = new Office[floorRoomsCount];
+                for (int j = 0; j < floorRoomsCount; j++) {
+                    int roomNum = din.readInt();
+                    din.skipBytes(2);
+                    int area = din.readInt();
+                    din.skipBytes(2);
+                    Space office = new Office(area, roomNum);
+                    offices[j] = office;
+                }
+                floors[i] = new OfficeFloor(offices);
+            }
+            result = new OfficeBuilding(floors);
         }
-        out.close();
+        return result;
     }
 
-    public static Building inputBuilding(InputStream in) throws IOException {
-        Building building = null;
-
-//чтения данных о здании из байтового потока
-        return null;
-    }
-
-    public static void writeBuilding(Building building, Writer out) throws IOException {
-        out.write(building.getFloorsNum());
-        for (int i = 1; i <= building.getFloorsNum(); i++) {
-            Floor floor = building.getFloor(i);
-            out.write(floor.getSpaceNum());
-            out.write(floor.getRooms());
-            out.write(floor.getAreas());
+    public static void writeBuilding (Building building, Writer out) throws IOException{
+        if (building != null) {
+            int floorsCount = building.getFloorsNum();
+            out.write(Integer.toString(floorsCount));
+            out.write(" ");
+            for (int i = 0; i < building.getFloorsNum(); i++) {
+                out.write(Integer.toString(building.getFloor(i).getSpaceNum()));
+                out.write(" ");
+                for (int j = 0; j < building.getFloor(i).getSpaceNum(); j++) {
+                    out.write(Integer.toString(building.getFloor(i).getSpace(j).getRoom()));
+                    out.write(" ");
+                    out.write(Integer.toString(building.getFloor(i).getSpace(j).getArea()));
+                    out.write(" ");
+                }
+            }
         }
-        out.close();
-//записи здания в символьный поток
     }
 
-    public static Building readBuilding(Reader in) {
-        //чтения здания из символьного потока
-        return null;
+    public static Building readBuilding (Reader in) throws IOException {
+        BufferedReader bin = new BufferedReader(in);
+        Building result = null;
+        if (bin.ready()) {
+            String[] s = bin.readLine().split(" ");
+            int count = 0;
+            int floorsNum = Integer.parseInt(s[count++]);
+            Floor[] floors = new OfficeFloor[floorsNum];
+            for (int i = 0; i < floorsNum; i++) {
+                int floorRoomsCount = Integer.parseInt(s[count++]);
+                Space[] offices = new Office[floorRoomsCount];
+                for (int j = 0; j < floorRoomsCount; j++) {
+                    int roomNum = Integer.parseInt(s[count++]);
+                    int area = Integer.parseInt(s[count++]);
+                    Space office = new Office(area, roomNum);
+                    offices[j] = office;
+                }
+                floors[i] = new OfficeFloor(offices);
+            }
+            result = new OfficeBuilding(floors);
+        }
+        return result;
+    }
+
+    public static void serializeBuilding (Building building, OutputStream out) throws IOException {
+        if (building != null) {
+            ObjectOutputStream oos = new ObjectOutputStream(out);
+            oos.writeObject(building);
+        }
+    }
+
+    public static Building deserializeBuilding (InputStream in) throws IOException, ClassNotFoundException {
+        Building result = null;
+        ObjectInputStream ois = new ObjectInputStream(in);
+        result = (Building) ois.readObject();
+        return result;
+    }
+
+    public static void writeBuildingFormat (Building building, Writer out) {
+    }
+
+    public Building readBuilding(Scanner scanner) {
+        Building result = null;
+        return result;
     }
 }

@@ -36,7 +36,6 @@ public class CLList {
     }
 
 
-
     public int getLength() {
         return length;
     }
