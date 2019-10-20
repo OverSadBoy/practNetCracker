@@ -71,7 +71,7 @@ public class OfficeBuilding implements Building {
     @Override
     public Floor[] getFloors() {
         Floor[] floors = new Floor[list.getLength()];
-        for (int i = 0; i < floors.length; i++) {
+        for (int i = 1; i < floors.length; i++) {
             floors[i] = getItem(i).data;
         }
         return floors;
@@ -141,28 +141,23 @@ public class OfficeBuilding implements Building {
 
     @Override
     public Space[] getSortSpace() {
-        CLList listSpaces = new CLList();
-        for (int i = 1, k = 1; i < list.getLength(); i++) {
-            for (int j = 1; j < getItem(i).data.getSpaceNum(); j++) {
-                listSpaces.addItem(k, getItem(i).data.getSpace(j));
+        Space[] spaces = new Space[getSpacesNum()];
+        for (int i = 1, k = 0; i <= list.getLength(); i++) {
+            for (int j = 1; j <= getItem(i).data.getSpaceNum(); j++) {
+                spaces[k] = getItem(i).data.getSpace(j);
                 k++;
             }
         }
-        for (int i = 1; i < listSpaces.getLength(); i++) {
-            int maxArea = 0;
-            for (int j = i; j < listSpaces.getLength(); j++) {
-                if (listSpaces.getItem(j).data.getArea() > maxArea) {
-                    maxArea = listSpaces.getItem(j).data.getArea();
-                    Item item = listSpaces.getItem(j);
-                    listSpaces.getItem(j - 1).next = listSpaces.getItem(j).next;
-                    item.next = listSpaces.getItem(i);
-                    listSpaces.getItem(i - 1).next = item;
+        for (int i = 0; i < spaces.length; i++) {
+            double maxArea = 0;
+            for (int j = i; j < spaces.length; j++) {
+                if (spaces[j].getArea() > maxArea) {
+                    maxArea = spaces[j].getArea();
+                    Space flat = spaces[i];
+                    spaces[i] = spaces[j];
+                    spaces[j] = flat;
                 }
             }
-        }
-        Space[] spaces = new Space[listSpaces.getLength()];
-        for (int i = 0; i < spaces.length; i++) {
-            spaces[i] = listSpaces.getItem(i).data;
         }
         return spaces;
     }
@@ -171,5 +166,4 @@ public class OfficeBuilding implements Building {
     public Space getBestSpace() {
         return getSortSpace()[0];
     }
-
 }

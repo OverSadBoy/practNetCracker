@@ -58,7 +58,7 @@ public class OfficeFloor implements Floor {
     @Override
     public Space[] getSpaces() {
         Space[] offices = new Office[list.getLength()];
-        for (int i = 0; i < offices.length; i++) {
+        for (int i = 1; i < offices.length; i++) {
             offices[i] = getItem(i).data;
         }
         return offices;
