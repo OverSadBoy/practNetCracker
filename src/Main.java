@@ -39,7 +39,7 @@ public class Main {
             System.out.println(spaces2[i].getArea());
         }
 
-        /*try {
+        try {
             PlacementExchanger.exchangeFloorRooms(officeBuilding.getFloor(1),1, officeBuildingSec.getFloor(1),1);
         } catch (InexchangeableSpacesException e) {
             e.printStackTrace();
@@ -54,7 +54,6 @@ public class Main {
             System.out.println(spaces4[i].getArea());
         }
 
-         */
         System.out.println("Обмен этажами");
         try {
             PlacementExchanger.exchangeBuildingFloors(officeBuilding,1,officeBuildingSec,1);

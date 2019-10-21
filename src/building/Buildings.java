@@ -29,7 +29,7 @@ public class Buildings {
         if (din.available() > 0) {
             int floorsNum = din.readInt();
             din.skipBytes(2);
-            Floor[] floors = new OfficeFloor[floorsNum];
+            Floor[] floors = new Floor[floorsNum];
             for (int i = 0; i < floorsNum; i++) {
                 int floorRoomsCount = din.readInt();
                 din.skipBytes(2);
@@ -74,10 +74,10 @@ public class Buildings {
             String[] s = bin.readLine().split(" ");
             int count = 0;
             int floorsNum = Integer.parseInt(s[count++]);
-            Floor[] floors = new OfficeFloor[floorsNum];
+            Floor[] floors = new Floor[floorsNum];
             for (int i = 0; i < floorsNum; i++) {
                 int floorRoomsCount = Integer.parseInt(s[count++]);
-                Space[] offices = new Office[floorRoomsCount];
+                Space[] offices = new Space[floorRoomsCount];
                 for (int j = 0; j < floorRoomsCount; j++) {
                     int roomNum = Integer.parseInt(s[count++]);
                     int area = Integer.parseInt(s[count++]);
@@ -133,10 +133,10 @@ public class Buildings {
             String[] s = scanner.next().split(" ");
             int count = 0;
             int floorsNum = Integer.parseInt(s[count++]);
-            Floor[] floors = new OfficeFloor[floorsNum];
+            Floor[] floors = new Floor[floorsNum];
             for (int i = 0; i < floorsNum; i++) {
                 int floorRoomsCount = Integer.parseInt(s[count++]);
-                Space[] offices = new Office[floorRoomsCount];
+                Space[] offices = new Space[floorRoomsCount];
                 for (int j = 0; j < floorRoomsCount; j++) {
                     int roomNum = Integer.parseInt(s[count++]);
                     int area = Integer.parseInt(s[count++]);
