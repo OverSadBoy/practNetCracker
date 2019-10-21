@@ -2,6 +2,7 @@ package lList;
 
 import building.Office;
 import building.Space;
+import exception.SpaceIndexOutOfBoundsException;
 
 public class CLList {
     private Item head;
@@ -68,7 +69,8 @@ public class CLList {
             }
 
         } else {
-            System.out.println("Ошибка при добавлении элемента!");
+            throw new SpaceIndexOutOfBoundsException();
+
         }
     }
 
@@ -84,7 +86,7 @@ public class CLList {
                 this.length--;
             }
         } else {
-            System.out.println("Ошибка при удалении элемента!");
+            throw new SpaceIndexOutOfBoundsException();
         }
     }
 }

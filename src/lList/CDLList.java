@@ -2,6 +2,7 @@ package lList;
 
 import building.Floor;
 import building.OfficeFloor;
+import exception.FloorIndexOutOfBoundsException;
 
 public class CDLList {
     private DoubleItem head;
@@ -60,7 +61,7 @@ public class CDLList {
                 this.length++;
             }
         } else {
-            System.out.println("Ошибка при добавлении элемента!");
+            throw new FloorIndexOutOfBoundsException();
         }
     }
 
@@ -77,7 +78,7 @@ public class CDLList {
                 this.length--;
             }
         } else {
-            System.out.println("Ошибка при удалении элемента!");
+            throw new FloorIndexOutOfBoundsException();
         }
     }
 }
