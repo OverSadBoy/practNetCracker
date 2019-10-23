@@ -1,4 +1,8 @@
-package building;
+package building.dwelling;
+
+import building.Building;
+import building.Floor;
+import building.Space;
 
 import java.io.Serializable;
 
@@ -122,5 +126,16 @@ public class Dwelling implements Building, Serializable {
 
     public Space getBestSpace() {
         return getSortSpace()[0];
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < getFloorsNum(); i++) {
+            str.append(getFloor(i));
+            if (i < getFloorsNum())
+                str.append(", ");
+        }
+        return "Dwelling" + "(" +getFloorsNum()+", "+ str + ")";
     }
 }

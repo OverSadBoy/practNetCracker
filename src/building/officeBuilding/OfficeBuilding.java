@@ -1,11 +1,12 @@
-package building;
+package building.officeBuilding;
 
+import building.Building;
+import building.Floor;
+import building.Space;
 import exception.FloorIndexOutOfBoundsException;
 import exception.SpaceIndexOutOfBoundsException;
 import lList.CDLList;
-import lList.CLList;
 import lList.DoubleItem;
-import lList.Item;
 
 import java.io.Serializable;
 
@@ -167,5 +168,20 @@ public class OfficeBuilding implements Building, Serializable {
     @Override
     public Space getBestSpace() {
         return getSortSpace()[0];
+    }
+/*Добавьте в классы зданий Dwelling, OfficeBuilding реализации метода String toString().
+ Методы выводят текущее количество этажей и соответствующую информацию о каждом помещении каждого этажа,
+  используя toString() уровня этажа и помещения. Например,
+Dwelling (2, DwellingFloor (3, Flat (...), ...), DwellingFloor (3, Flat (...), ...)*/
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        for (int i = 1; i <= getFloorsNum(); i++) {
+            str.append(getFloor(i));
+            if (i < getFloorsNum())
+                str.append(", ");
+        }
+        return "OfficeBuilding" + "(" +getFloorsNum()+", "+ str + ")";
     }
 }

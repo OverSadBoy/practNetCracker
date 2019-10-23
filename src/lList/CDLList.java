@@ -1,7 +1,7 @@
 package lList;
 
 import building.Floor;
-import building.OfficeFloor;
+import building.officeBuilding.OfficeFloor;
 import exception.FloorIndexOutOfBoundsException;
 
 public class CDLList {

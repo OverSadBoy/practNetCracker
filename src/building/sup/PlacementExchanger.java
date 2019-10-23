@@ -1,5 +1,8 @@
-package building;
+package building.sup;
 
+import building.Building;
+import building.Floor;
+import building.Space;
 import exception.InexchangeableFloorsException;
 import exception.InexchangeableSpacesException;
 

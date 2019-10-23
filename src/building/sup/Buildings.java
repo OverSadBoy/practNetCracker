@@ -1,4 +1,11 @@
-package building;
+package building.sup;
+
+import building.Building;
+import building.Floor;
+import building.Space;
+import building.officeBuilding.Office;
+import building.officeBuilding.OfficeBuilding;
+import building.officeBuilding.OfficeFloor;
 
 import java.io.*;
 import java.util.Scanner;

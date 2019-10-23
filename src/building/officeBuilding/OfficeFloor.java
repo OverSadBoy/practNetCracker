@@ -1,5 +1,7 @@
-package building;
+package building.officeBuilding;
 
+import building.Floor;
+import building.Space;
 import exception.SpaceIndexOutOfBoundsException;
 import lList.CLList;
 import lList.Item;
@@ -95,5 +97,16 @@ public class OfficeFloor implements Floor {
             }
         }
         return bestSpace;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        for (int i = 1; i <= getSpaceNum(); i++) {
+            str.append(((Office) getSpace(i)).toString());
+            if (i < getSpaceNum())
+                str.append(", ");
+        }
+        return "OfficeFloor" + " (" + getSpaceNum() + ", " + str.toString() + ")";
     }
 }

@@ -1,4 +1,6 @@
-package building;
+package building.dwelling;
+
+import building.Space;
 
 public class Flat implements Space {
     private int area;
@@ -33,5 +35,10 @@ public class Flat implements Space {
 
     public void setRoom(int room) {
         this.room = room;
+    }
+
+    @Override
+    public String toString() {
+        return "Flat" + " (" + room + ", " + area + ")";
     }
 }

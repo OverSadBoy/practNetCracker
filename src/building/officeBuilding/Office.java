@@ -1,4 +1,6 @@
-package building;
+package building.officeBuilding;
+
+import building.Space;
 
 public class Office implements Space {
 
@@ -20,7 +22,6 @@ public class Office implements Space {
         return area;
     }
 
-
     public void setArea(int area) {
         this.area = area;
     }
@@ -29,8 +30,12 @@ public class Office implements Space {
         return room;
     }
 
-
     public void setRoom(int room) {
         this.room = room;
+    }
+
+    @Override
+    public String toString() {
+        return "Office" + " (" + room + ", " + area + ")";
     }
 }

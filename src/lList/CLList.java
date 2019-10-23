@@ -1,6 +1,6 @@
 package lList;
 
-import building.Office;
+import building.officeBuilding.Office;
 import building.Space;
 import exception.SpaceIndexOutOfBoundsException;
 

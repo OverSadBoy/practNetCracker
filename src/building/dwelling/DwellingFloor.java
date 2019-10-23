@@ -1,6 +1,9 @@
-package building;
+package building.dwelling;
 
-public class DwellingFloor implements Floor{
+import building.Floor;
+import building.Space;
+
+public class DwellingFloor implements Floor {
     private Space[] spaces;
 
     public DwellingFloor(int flatsNum) {
@@ -46,7 +49,7 @@ public class DwellingFloor implements Floor{
     }
 
     public void addSpace(int num, Space space) {
-        Space[] spacesSec = new Space[spaces.length+1];
+        Space[] spacesSec = new Space[spaces.length + 1];
         if (num > spaces.length) {
             for (int i = 0; i < spaces.length; i++) {
                 spacesSec[i] = spaces[i];
@@ -71,7 +74,7 @@ public class DwellingFloor implements Floor{
             if (i < num)
                 spacesSec[i] = spaces[i];
             else
-                spacesSec[i] = spaces[i+1];
+                spacesSec[i] = spaces[i + 1];
 
         }
         spaces = spacesSec;
@@ -87,5 +90,16 @@ public class DwellingFloor implements Floor{
             }
         }
         return space;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < getSpaceNum(); i++) {
+            str.append(((Flat) getSpace(i)).toString());
+            if (i < getSpaceNum() - 1)
+                str.append(", ");
+        }
+        return "DwellingFloor" + " (" + getSpaceNum() + ", " + str.toString() + ")";
     }
 }
