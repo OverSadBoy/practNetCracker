@@ -34,6 +34,7 @@ public class Main {
         dwelling.setSpace(8, new Flat(999, 4));
 
         Flat flat = new Flat(55, 3);
+        Flat flat2 = new Flat(55, 3);
         System.out.println(flat.toString());
         Office office1 = new Office(77, 4);
         System.out.println(office1.toString());
@@ -43,5 +44,6 @@ public class Main {
         System.out.println(officeFloor.toString());
         System.out.println(officeBuilding.toString());
         System.out.println(dwelling.toString());
+        System.out.println(flat.equals(flat2));
     }
 }

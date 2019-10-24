@@ -138,4 +138,13 @@ public class Dwelling implements Building, Serializable {
         }
         return "Dwelling" + "(" +getFloorsNum()+", "+ str + ")";
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Dwelling)
+            if (((Dwelling) obj).getFloorsNum() == getFloorsNum())
+                for (int i = 0; i < getFloorsNum(); i++)
+                    if (((Dwelling) obj).getFloor(i).equals(getFloor(i)))
+                        return true;
+        return false;
+    }
 }

@@ -102,4 +102,14 @@ public class DwellingFloor implements Floor {
         }
         return "DwellingFloor" + " (" + getSpaceNum() + ", " + str.toString() + ")";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DwellingFloor)
+            if (((DwellingFloor) obj).getSpaceNum() == getSpaceNum())
+                for (int i = 0; i < getSpaceNum(); i++)
+                    if (((DwellingFloor) obj).getSpace(i).equals(getSpace(i)))
+                        return true;
+        return false;
+    }
 }

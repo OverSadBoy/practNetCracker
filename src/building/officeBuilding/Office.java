@@ -38,4 +38,9 @@ public class Office implements Space {
     public String toString() {
         return "Office" + " (" + room + ", " + area + ")";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Office && ((Office) obj).area == this.area && ((Office) obj).room == this.room;
+    }
 }

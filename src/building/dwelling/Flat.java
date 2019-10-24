@@ -41,4 +41,9 @@ public class Flat implements Space {
     public String toString() {
         return "Flat" + " (" + room + ", " + area + ")";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Flat && ((Flat) obj).area == this.area && ((Flat) obj).room == this.room;
+    }
 }

@@ -109,4 +109,13 @@ public class OfficeFloor implements Floor {
         }
         return "OfficeFloor" + " (" + getSpaceNum() + ", " + str.toString() + ")";
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof OfficeFloor)
+            if (((OfficeFloor) obj).getSpaceNum() == getSpaceNum())
+                for (int i = 0; i < getSpaceNum(); i++)
+                    if (((OfficeFloor) obj).getSpace(i).equals(getSpace(i)))
+                        return true;
+        return false;
+    }
 }
