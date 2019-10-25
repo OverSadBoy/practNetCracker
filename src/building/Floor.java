@@ -20,4 +20,6 @@ public interface Floor {
 
     public Space getBestSpace();
 
+    public Object clone() throws CloneNotSupportedException;
+
 }

@@ -3,7 +3,7 @@ package building.dwelling;
 import building.Space;
 
 public class Flat implements Space {
-    private int area;
+    private double area;
     private int room;
     private static final int DEF_AREA = 50;
     private static final int DEF_ROOM = 2;
@@ -21,7 +21,7 @@ public class Flat implements Space {
         this(DEF_AREA, DEF_ROOM);
     }
 
-    public int getArea() {
+    public double getArea() {
         return area;
     }
 
@@ -45,5 +45,17 @@ public class Flat implements Space {
     @Override
     public boolean equals(Object obj) {
         return obj instanceof Flat && ((Flat) obj).area == this.area && ((Flat) obj).room == this.room;
+    }
+
+    @Override
+    public int hashCode() {
+        Integer room = this.room;
+        Double area = this.area;
+        return room.byteValue() ^ area.byteValue();
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

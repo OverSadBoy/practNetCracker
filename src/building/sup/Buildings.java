@@ -23,7 +23,7 @@ public class Buildings {
                 for (int j = 0; j < building.getFloor(i).getRooms(); j++) {
                     dout.writeInt(building.getFloor(i).getSpace(j).getRoom());
                     dout.writeChars(" ");
-                    dout.writeInt(building.getFloor(i).getSpace(j).getArea());
+                    dout.writeDouble(building.getFloor(i).getSpace(j).getArea());
                     dout.writeChars(" ");
                 }
             }
@@ -67,7 +67,7 @@ public class Buildings {
                 for (int j = 0; j < building.getFloor(i).getSpaceNum(); j++) {
                     out.write(Integer.toString(building.getFloor(i).getSpace(j).getRoom()));
                     out.write(" ");
-                    out.write(Integer.toString(building.getFloor(i).getSpace(j).getArea()));
+                    out.write(Double.toString(building.getFloor(i).getSpace(j).getArea()));
                     out.write(" ");
                 }
             }
@@ -127,7 +127,7 @@ public class Buildings {
                     out.write(Integer.toString(building.getFloor(i).getSpace(j).getRoom()));
                     out.write(" , ");
                     out.write("Площадь в помещении: ");
-                    out.write(Integer.toString(building.getFloor(i).getSpace(j).getArea()));
+                    out.write(Double.toString(building.getFloor(i).getSpace(j).getArea()));
                     out.write(" , ");
                 }
             }

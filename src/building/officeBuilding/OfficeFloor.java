@@ -84,12 +84,14 @@ public class OfficeFloor implements Floor {
     @Override
     public void deleteSpace(int num) throws SpaceIndexOutOfBoundsException {
         deleteItem(num);
+
     }
 
     @Override
     public Space getBestSpace() {
         Space bestSpace = null;
-        for (int i = 0, max = 0; getItem(i) != null; i++) {
+        double max = 0.0;
+        for (int i = 0; getItem(i) != null; i++) {
             Space space = getItem(i).data;
             if (max < space.getArea()) {
                 max = space.getArea();
@@ -109,6 +111,7 @@ public class OfficeFloor implements Floor {
         }
         return "OfficeFloor" + " (" + getSpaceNum() + ", " + str.toString() + ")";
     }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof OfficeFloor)
@@ -117,5 +120,25 @@ public class OfficeFloor implements Floor {
                     if (((OfficeFloor) obj).getSpace(i).equals(getSpace(i)))
                         return true;
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result=0;
+        Integer spacesNum = getSpaceNum();
+        for (int i = 1; i <= spacesNum; i++) {
+            result += spacesNum.byteValue() ^ getSpace(i).hashCode();
+        }
+        return result;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Object res = null;
+        res = super.clone();
+        for (int i = 1; i <= getSpaceNum(); i++) {
+            ((Floor)res).addSpace(i,(Space)getSpace(i).clone());
+        }
+        return res;
     }
 }

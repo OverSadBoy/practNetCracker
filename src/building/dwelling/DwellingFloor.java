@@ -82,7 +82,7 @@ public class DwellingFloor implements Floor {
 
     public Space getBestSpace() {
         Space space = null;
-        int bestArea = 0;
+        double bestArea = 0;
         for (int i = 0; i < spaces.length; i++) {
             if (spaces[i].getArea() > bestArea) {
                 bestArea = spaces[i].getArea();
@@ -111,5 +111,25 @@ public class DwellingFloor implements Floor {
                     if (((DwellingFloor) obj).getSpace(i).equals(getSpace(i)))
                         return true;
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 0;
+        Integer spacesNum = getSpaceNum();
+        for (int i = 0; i < spacesNum; i++) {
+            result += spacesNum.byteValue() ^ getSpace(i).hashCode();
+        }
+        return result;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Object res = null;
+        res = super.clone();
+        for (int i = 0; i < getSpaceNum(); i++) {
+            ((Floor)res).addSpace(i,(Space)getSpace(i).clone());
+        }
+        return res;
     }
 }

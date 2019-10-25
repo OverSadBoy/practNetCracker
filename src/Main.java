@@ -33,17 +33,19 @@ public class Main {
         dwelling.setSpace(7, new Flat(888, 4));
         dwelling.setSpace(8, new Flat(999, 4));
 
-        Flat flat = new Flat(55, 3);
-        Flat flat2 = new Flat(55, 3);
+        Flat flat = new Flat(55, 66);
+        Flat flat2 = new Flat(55, 32);
         System.out.println(flat.toString());
         Office office1 = new Office(77, 4);
         System.out.println(office1.toString());
         DwellingFloor dwellingFloor = new DwellingFloor(3);
         System.out.println(dwellingFloor.toString());
-        OfficeFloor officeFloor = new OfficeFloor(4);
+        OfficeFloor officeFloor = new OfficeFloor(56);
         System.out.println(officeFloor.toString());
         System.out.println(officeBuilding.toString());
         System.out.println(dwelling.toString());
         System.out.println(flat.equals(flat2));
+
+        System.out.println(dwelling.hashCode());
     }
 }

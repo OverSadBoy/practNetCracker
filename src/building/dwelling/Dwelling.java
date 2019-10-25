@@ -15,7 +15,7 @@ public class Dwelling implements Building, Serializable {
             dwellingFloors[i] = new DwellingFloor(numFlatForFloor[i]);
     }
 
-    public Dwelling(DwellingFloor[] dwellingFloor) {
+    public Dwelling(Floor[] dwellingFloor) {
         this.dwellingFloors = dwellingFloor;
     }
 
@@ -136,8 +136,9 @@ public class Dwelling implements Building, Serializable {
             if (i < getFloorsNum())
                 str.append(", ");
         }
-        return "Dwelling" + "(" +getFloorsNum()+", "+ str + ")";
+        return "Dwelling" + "(" + getFloorsNum() + ", " + str + ")";
     }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Dwelling)
@@ -146,5 +147,25 @@ public class Dwelling implements Building, Serializable {
                     if (((Dwelling) obj).getFloor(i).equals(getFloor(i)))
                         return true;
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 0;
+        Integer floorNum = getFloorsNum();
+        for (int i = 0; i < floorNum; i++) {
+            result += floorNum.byteValue() ^ getFloor(i).hashCode();
+        }
+        return result;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Object res = new Dwelling(getFloors());
+        res = super.clone();
+        for (int i = 0; i < getFloorsNum(); i++) {
+            ((Building) res).setFloor(i, (Floor) getFloor(i).clone());
+        }
+        return res;
     }
 }

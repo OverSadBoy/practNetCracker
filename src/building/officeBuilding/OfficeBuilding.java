@@ -169,10 +169,6 @@ public class OfficeBuilding implements Building, Serializable {
     public Space getBestSpace() {
         return getSortSpace()[0];
     }
-/*Добавьте в классы зданий Dwelling, OfficeBuilding реализации метода String toString().
- Методы выводят текущее количество этажей и соответствующую информацию о каждом помещении каждого этажа,
-  используя toString() уровня этажа и помещения. Например,
-Dwelling (2, DwellingFloor (3, Flat (...), ...), DwellingFloor (3, Flat (...), ...)*/
 
     @Override
     public String toString() {
@@ -182,6 +178,36 @@ Dwelling (2, DwellingFloor (3, Flat (...), ...), DwellingFloor (3, Flat (...), .
             if (i < getFloorsNum())
                 str.append(", ");
         }
-        return "OfficeBuilding" + "(" +getFloorsNum()+", "+ str + ")";
+        return "OfficeBuilding" + "(" + getFloorsNum() + ", " + str + ")";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof OfficeBuilding)
+            if (((OfficeBuilding) obj).getFloorsNum() == getFloorsNum())
+                for (int i = 0; i < getFloorsNum(); i++)
+                    if (((OfficeBuilding) obj).getFloor(i).equals(getFloor(i)))
+                        return true;
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 0;
+        Integer floorNum = getFloorsNum();
+        for (int i = 1; i <= floorNum; i++) {
+            result += floorNum.byteValue() ^ getFloor(i).hashCode();
+        }
+        return result;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Object res = new OfficeBuilding(getFloors());
+        res = super.clone();
+        for (int i = 1; i <= getFloorsNum(); i++) {
+            ((Building) res).setFloor(i, (Floor) getFloor(i).clone());
+        }
+        return res;
     }
 }

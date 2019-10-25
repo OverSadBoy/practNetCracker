@@ -17,4 +17,5 @@ public interface Building {
     public void deleteSpace(int num);
     public Space[] getSortSpace();
     public Space getBestSpace();
+    public Object clone() throws CloneNotSupportedException;
 }
