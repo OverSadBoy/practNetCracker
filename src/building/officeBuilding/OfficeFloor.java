@@ -114,17 +114,17 @@ public class OfficeFloor implements Floor {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof OfficeFloor)
-            if (((OfficeFloor) obj).getSpaceNum() == getSpaceNum())
-                for (int i = 0; i < getSpaceNum(); i++)
-                    if (((OfficeFloor) obj).getSpace(i).equals(getSpace(i)))
-                        return true;
-        return false;
+        boolean res = false;
+        if (obj instanceof OfficeFloor && ((OfficeFloor) obj).getSpaceNum() == getSpaceNum())
+            for (int i = 1; i <= getSpaceNum(); i++, res = true)
+                if (!((OfficeFloor) obj).getSpace(i).equals(getSpace(i)))
+                    return false;
+        return res;
     }
 
     @Override
     public int hashCode() {
-        int result=0;
+        int result = 0;
         Integer spacesNum = getSpaceNum();
         for (int i = 1; i <= spacesNum; i++) {
             result += spacesNum.byteValue() ^ getSpace(i).hashCode();
@@ -137,7 +137,7 @@ public class OfficeFloor implements Floor {
         Object res = null;
         res = super.clone();
         for (int i = 1; i <= getSpaceNum(); i++) {
-            ((Floor)res).addSpace(i,(Space)getSpace(i).clone());
+            ((Floor) res).addSpace(i, (Space) getSpace(i).clone());
         }
         return res;
     }

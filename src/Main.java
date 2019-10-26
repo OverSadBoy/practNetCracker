@@ -22,6 +22,17 @@ public class Main {
         officeBuilding.setSpace(6, new Office(777, 4));
         officeBuilding.setSpace(7, new Office(888, 4));
         officeBuilding.setSpace(8, new Office(999, 4));
+        int[] office1 = {2, 3, 4};
+        OfficeBuilding officeBuilding1 = new OfficeBuilding(3, office1);
+        officeBuilding1.setSpace(0, new Office(111, 8));
+        officeBuilding1.setSpace(1, new Office(45, 5));
+        officeBuilding1.setSpace(2, new Office(333, 5));
+        officeBuilding1.setSpace(3, new Office(444, 5));
+        officeBuilding1.setSpace(4, new Office(555, 5));
+        officeBuilding1.setSpace(5, new Office(666, 5));
+        officeBuilding1.setSpace(6, new Office(777, 4));
+        officeBuilding1.setSpace(7, new Office(888, 4));
+        officeBuilding1.setSpace(8, new Office(999, 4));
         Dwelling dwelling = new Dwelling(3, office);
         dwelling.setSpace(0, new Flat(234, 8));
         dwelling.setSpace(1, new Flat(6547, 5));
@@ -36,15 +47,15 @@ public class Main {
         Flat flat = new Flat(55, 66);
         Flat flat2 = new Flat(55, 32);
         System.out.println(flat.toString());
-        Office office1 = new Office(77, 4);
-        System.out.println(office1.toString());
+        Office officel1 = new Office(77, 4);
+        System.out.println(officel1.toString());
         DwellingFloor dwellingFloor = new DwellingFloor(3);
         System.out.println(dwellingFloor.toString());
         OfficeFloor officeFloor = new OfficeFloor(56);
         System.out.println(officeFloor.toString());
-        System.out.println(officeBuilding.toString());
+        System.out.println(officeBuilding1.toString());
         System.out.println(dwelling.toString());
-        System.out.println(flat.equals(flat2));
+        System.out.println(officeBuilding.equals(officeBuilding1));
 
         System.out.println(dwelling.hashCode());
     }

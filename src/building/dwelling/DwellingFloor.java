@@ -105,12 +105,12 @@ public class DwellingFloor implements Floor {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof DwellingFloor)
-            if (((DwellingFloor) obj).getSpaceNum() == getSpaceNum())
-                for (int i = 0; i < getSpaceNum(); i++)
-                    if (((DwellingFloor) obj).getSpace(i).equals(getSpace(i)))
-                        return true;
-        return false;
+        boolean res = false;
+        if (obj instanceof DwellingFloor && ((DwellingFloor) obj).getSpaceNum() == getSpaceNum())
+            for (int i = 0; i < getSpaceNum(); i++, res = true)
+                if (!((DwellingFloor) obj).getSpace(i).equals(getSpace(i)))
+                    return false;
+        return res;
     }
 
     @Override
@@ -128,7 +128,7 @@ public class DwellingFloor implements Floor {
         Object res = null;
         res = super.clone();
         for (int i = 0; i < getSpaceNum(); i++) {
-            ((Floor)res).addSpace(i,(Space)getSpace(i).clone());
+            ((Floor) res).addSpace(i, (Space) getSpace(i).clone());
         }
         return res;
     }

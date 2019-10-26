@@ -52,12 +52,12 @@ public class Hotel extends Dwelling {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Hotel)
-            if (((Hotel) obj).getFloorsNum() == getFloorsNum())
-                for (int i = 0; i < getFloorsNum(); i++)
-                    if (((Hotel) obj).getFloor(i).equals(getFloor(i)))
-                        return true;
-        return false;
+        boolean res = false;
+        if (obj instanceof Hotel && ((Hotel) obj).getFloorsNum() == getFloorsNum())
+            for (int i = 0; i < getFloorsNum(); i++, res = true)
+                if (!((Hotel) obj).getSpace(i).equals(getSpace(i)))
+                    return false;
+        return res;
     }
 
     @Override

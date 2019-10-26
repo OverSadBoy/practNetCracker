@@ -141,12 +141,12 @@ public class Dwelling implements Building, Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Dwelling)
-            if (((Dwelling) obj).getFloorsNum() == getFloorsNum())
-                for (int i = 0; i < getFloorsNum(); i++)
-                    if (((Dwelling) obj).getFloor(i).equals(getFloor(i)))
-                        return true;
-        return false;
+        boolean res = false;
+        if (obj instanceof Dwelling && ((Dwelling) obj).getFloorsNum() == getFloorsNum())
+            for (int i = 0; i < getFloorsNum(); i++, res = true)
+                if (!((Dwelling) obj).getSpace(i).equals(getSpace(i)))
+                    return false;
+        return res;
     }
 
     @Override

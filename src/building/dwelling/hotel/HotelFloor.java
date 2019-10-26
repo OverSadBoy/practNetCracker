@@ -40,12 +40,12 @@ public class HotelFloor extends DwellingFloor {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof HotelFloor)
-            if (((HotelFloor) obj).getSpaceNum() == getSpaceNum())
-                for (int i = 0; i < getSpaceNum(); i++)
-                    if (((HotelFloor) obj).getSpace(i).equals(getSpace(i)))
-                        return true;
-        return false;
+        boolean res = false;
+        if (obj instanceof HotelFloor && ((HotelFloor) obj).getSpaceNum() == getSpaceNum())
+            for (int i = 0; i < getSpaceNum(); i++, res = true)
+                if (!((HotelFloor) obj).getSpace(i).equals(getSpace(i)))
+                    return false;
+        return res;
     }
 
     @Override

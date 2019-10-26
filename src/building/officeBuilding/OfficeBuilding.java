@@ -183,12 +183,12 @@ public class OfficeBuilding implements Building, Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof OfficeBuilding)
-            if (((OfficeBuilding) obj).getFloorsNum() == getFloorsNum())
-                for (int i = 0; i < getFloorsNum(); i++)
-                    if (((OfficeBuilding) obj).getFloor(i).equals(getFloor(i)))
-                        return true;
-        return false;
+        boolean res = false;
+        if (obj instanceof OfficeBuilding && ((OfficeBuilding) obj).getFloorsNum() == getFloorsNum())
+            for (int i = 1; i <= getFloorsNum(); i++, res = true)
+                if (!((OfficeBuilding) obj).getSpace(i).equals(getSpace(i)))
+                    return false;
+        return res;
     }
 
     @Override
