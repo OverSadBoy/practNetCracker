@@ -1,5 +1,6 @@
 package building;
 
+
 public interface Floor {
 
     public int getSpaceNum();
@@ -22,4 +23,5 @@ public interface Floor {
 
     public Object clone() throws CloneNotSupportedException;
 
+    java.util.Iterator iterator();
 }

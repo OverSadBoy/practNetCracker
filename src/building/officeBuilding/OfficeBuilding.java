@@ -10,7 +10,7 @@ import lList.DoubleItem;
 
 import java.io.Serializable;
 
-public class OfficeBuilding implements Building, Serializable {
+public class OfficeBuilding implements Building, Serializable,Cloneable {
     private CDLList list;
 
     private DoubleItem getItem(int num) {

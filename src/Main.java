@@ -22,6 +22,7 @@ public class Main {
         officeBuilding.setSpace(6, new Office(777, 4));
         officeBuilding.setSpace(7, new Office(888, 4));
         officeBuilding.setSpace(8, new Office(999, 4));
+
         int[] office1 = {2, 3, 4};
         OfficeBuilding officeBuilding1 = new OfficeBuilding(3, office1);
         officeBuilding1.setSpace(0, new Office(111, 8));
@@ -33,6 +34,7 @@ public class Main {
         officeBuilding1.setSpace(6, new Office(777, 4));
         officeBuilding1.setSpace(7, new Office(888, 4));
         officeBuilding1.setSpace(8, new Office(999, 4));
+
         Dwelling dwelling = new Dwelling(3, office);
         dwelling.setSpace(0, new Flat(234, 8));
         dwelling.setSpace(1, new Flat(6547, 5));
@@ -44,7 +46,15 @@ public class Main {
         dwelling.setSpace(7, new Flat(888, 4));
         dwelling.setSpace(8, new Flat(999, 4));
 
-        Flat flat = new Flat(55, 66);
+        Dwelling gg = null;
+        try {
+            gg = (Dwelling) dwelling.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(gg.toString());
+
+        /*Flat flat = new Flat(55, 66);
         Flat flat2 = new Flat(55, 32);
         System.out.println(flat.toString());
         Office officel1 = new Office(77, 4);
@@ -57,6 +67,8 @@ public class Main {
         System.out.println(dwelling.toString());
         System.out.println(officeBuilding.equals(officeBuilding1));
 
-        System.out.println(dwelling.hashCode());
+        System.out.println(flat.hashCode());
+        System.out.println(Integer.toString(3,2));*/
+
     }
 }

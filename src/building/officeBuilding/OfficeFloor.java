@@ -6,7 +6,7 @@ import exception.SpaceIndexOutOfBoundsException;
 import lList.CLList;
 import lList.Item;
 
-public class OfficeFloor implements Floor {
+public class OfficeFloor implements Floor, Cloneable {
 
     private CLList list;
 

@@ -2,7 +2,7 @@ package building.dwelling;
 
 import building.Space;
 
-public class Flat implements Space {
+public class Flat implements Space,Cloneable {
     private double area;
     private int room;
     private static final int DEF_AREA = 50;
@@ -49,6 +49,14 @@ public class Flat implements Space {
 
     @Override
     public int hashCode() {
+       /* StringBuilder roomStr = new StringBuilder(Integer.toString(this.room,2)).reverse();
+        roomStr.delete(3,roomStr.length());
+        StringBuilder areaStr = new StringBuilder(Integer.toString((int)this.area,2)).reverse();
+        areaStr.delete(3,areaStr.length());
+        byte room = Byte.parseByte(roomStr.toString());
+        byte area = Byte.parseByte(areaStr.toString());
+        return  room ^ area;
+        */
         Integer room = this.room;
         Double area = this.area;
         return room.byteValue() ^ area.byteValue();

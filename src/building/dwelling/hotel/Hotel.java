@@ -47,7 +47,7 @@ public class Hotel extends Dwelling {
             if (i < getFloorsNum())
                 str.append(", ");
         }
-        return "Hotel" + "(" + getFloorsNum() + ", " + str + ")";
+        return "Hotel" + "(" + getStarHotel() + ", " + getFloorsNum() + ", " + str + ")";
     }
 
     @Override

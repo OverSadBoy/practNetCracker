@@ -3,7 +3,9 @@ package building.dwelling;
 import building.Floor;
 import building.Space;
 
-public class DwellingFloor implements Floor {
+import java.util.Iterator;
+
+public class DwellingFloor implements Floor,Cloneable {
     private Space[] spaces;
 
     public DwellingFloor(int flatsNum) {
@@ -131,5 +133,10 @@ public class DwellingFloor implements Floor {
             ((Floor) res).addSpace(i, (Space) getSpace(i).clone());
         }
         return res;
+    }
+
+    @Override
+    public Iterator iterator() {
+        return null;
     }
 }
