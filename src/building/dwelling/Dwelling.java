@@ -161,8 +161,7 @@ public class Dwelling implements Building, Serializable,Cloneable {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        Object res;
-        res = super.clone();
+        Object res = super.clone();
         for (int i = 0; i < getFloorsNum(); i++) {
             ((Building) res).setFloor(i, (Floor) getFloor(i).clone());
         }

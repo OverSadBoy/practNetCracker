@@ -5,7 +5,7 @@ import building.Space;
 
 import java.util.Iterator;
 
-public class DwellingFloor implements Floor,Cloneable {
+public class DwellingFloor implements Floor, Cloneable {
     private Space[] spaces;
 
     public DwellingFloor(int flatsNum) {
@@ -127,8 +127,7 @@ public class DwellingFloor implements Floor,Cloneable {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        Object res = null;
-        res = super.clone();
+        Object res = super.clone();
         for (int i = 0; i < getSpaceNum(); i++) {
             ((Floor) res).addSpace(i, (Space) getSpace(i).clone());
         }
@@ -137,6 +136,6 @@ public class DwellingFloor implements Floor,Cloneable {
 
     @Override
     public Iterator iterator() {
-        return null;
+        return new building.sup.Iterator<DwellingFloor>();
     }
 }

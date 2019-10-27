@@ -6,6 +6,8 @@ import exception.SpaceIndexOutOfBoundsException;
 import lList.CLList;
 import lList.Item;
 
+import java.util.Iterator;
+
 public class OfficeFloor implements Floor, Cloneable {
 
     private CLList list;
@@ -134,11 +136,15 @@ public class OfficeFloor implements Floor, Cloneable {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        Object res = null;
-        res = super.clone();
+        Object res = super.clone();
         for (int i = 1; i <= getSpaceNum(); i++) {
             ((Floor) res).addSpace(i, (Space) getSpace(i).clone());
         }
         return res;
+    }
+
+    @Override
+    public Iterator iterator() {
+        return null;
     }
 }

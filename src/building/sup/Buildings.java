@@ -3,6 +3,8 @@ package building.sup;
 import building.Building;
 import building.Floor;
 import building.Space;
+import building.factory.BuildingFactory;
+import building.factory.DwellingFactory;
 import building.officeBuilding.Office;
 import building.officeBuilding.OfficeBuilding;
 import building.officeBuilding.OfficeFloor;
@@ -11,6 +13,36 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Buildings {
+
+    private static BuildingFactory buildingFactory = new DwellingFactory();
+
+    public static void setBuildingFactory(BuildingFactory buildingFactory) {
+        Buildings.buildingFactory = buildingFactory;
+    }
+
+    public static Space createSpace(double area) {
+        return buildingFactory.createSpace(area);
+    }
+
+    public static Space createSpace(int roomsCount, double area) {
+        return buildingFactory.createSpace(roomsCount, area);
+    }
+
+    public static Floor createFloor(int spacesCount) {
+        return buildingFactory.createFloor(spacesCount);
+    }
+
+    public static Floor createFloor(Space[] spaces) {
+        return buildingFactory.createFloor(spaces);
+    }
+
+    public static Building createBuilding(int floorsCount, int[] spacesCounts) {
+        return buildingFactory.createBuilding(floorsCount, spacesCounts);
+    }
+
+    public static Building createBuilding(Floor[] floors) {
+        return buildingFactory.createBuilding(floors);
+    }
 
     public static void outputBuilding(Building building, OutputStream out) throws IOException {
         if (building != null) {
@@ -46,12 +78,12 @@ public class Buildings {
                     din.skipBytes(2);
                     int area = din.readInt();
                     din.skipBytes(2);
-                    Space office = new Office(area, roomNum);
-                    spaces[j] = office;
+                    Space space = createSpace(area, roomNum);
+                    spaces[j] = space;
                 }
-                floors[i] = new OfficeFloor(spaces);
+                floors[i] = createFloor(spaces);
             }
-            result = new OfficeBuilding(floors);
+            result = createBuilding(floors);
         }
         return result;
     }
@@ -88,12 +120,12 @@ public class Buildings {
                 for (int j = 0; j < floorRoomsCount; j++) {
                     int roomNum = Integer.parseInt(s[count++]);
                     int area = Integer.parseInt(s[count++]);
-                    Space office = new Office(area, roomNum);
-                    offices[j] = office;
+                    Space space = createSpace(area, roomNum);
+                    offices[j] = space;
                 }
-                floors[i] = new OfficeFloor(offices);
+                floors[i] = createFloor(offices);
             }
-            result = new OfficeBuilding(floors);
+            result = createBuilding(floors);
         }
         return result;
     }
@@ -115,18 +147,18 @@ public class Buildings {
     public static void writeBuildingFormat(Building building, Writer out) throws IOException {
         if (building != null) {
             int floorsCount = building.getFloorsNum();
-            out.write("Количество этажей: ");
+            out.write("%% Количество этажей: ");
             out.write(Integer.toString(floorsCount));
             out.write(" , ");
             for (int i = 0; i < building.getFloorsNum(); i++) {
-                out.write("Количество помещений на этаже: ");
+                out.write("%t %TКоличество помещений на этаже: ");
                 out.write(Integer.toString(building.getFloor(i).getSpaceNum()));
                 out.write(" , ");
                 for (int j = 0; j < building.getFloor(i).getSpaceNum(); j++) {
-                    out.write("Количество комнат в помещении: ");
+                    out.write("%n Количество комнат в помещении: ");
                     out.write(Integer.toString(building.getFloor(i).getSpace(j).getRoom()));
                     out.write(" , ");
-                    out.write("Площадь в помещении: ");
+                    out.write("%s Площадь в помещении: ");
                     out.write(Double.toString(building.getFloor(i).getSpace(j).getArea()));
                     out.write(" , ");
                 }
@@ -147,12 +179,12 @@ public class Buildings {
                 for (int j = 0; j < floorRoomsCount; j++) {
                     int roomNum = Integer.parseInt(s[count++]);
                     int area = Integer.parseInt(s[count++]);
-                    Space office = new Office(area, roomNum);
-                    offices[j] = office;
+                    Space space = createSpace(area, roomNum);
+                    offices[j] = space;
                 }
-                floors[i] = new OfficeFloor(offices);
+                floors[i] = createFloor(offices);
             }
-            result = new OfficeBuilding(floors);
+            result = createBuilding(floors);
         }
         return result;
     }

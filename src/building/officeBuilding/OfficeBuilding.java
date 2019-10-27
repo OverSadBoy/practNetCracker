@@ -203,8 +203,7 @@ public class OfficeBuilding implements Building, Serializable,Cloneable {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        Object res = new OfficeBuilding(getFloors());
-        res = super.clone();
+        Object res = super.clone();
         for (int i = 1; i <= getFloorsNum(); i++) {
             ((Building) res).setFloor(i, (Floor) getFloor(i).clone());
         }

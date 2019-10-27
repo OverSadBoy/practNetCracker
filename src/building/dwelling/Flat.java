@@ -8,12 +8,12 @@ public class Flat implements Space,Cloneable {
     private static final int DEF_AREA = 50;
     private static final int DEF_ROOM = 2;
 
-    public Flat(int area, int room) {
+    public Flat(double area, int room) {
         this.area = area;
         this.room = room;
     }
 
-    public Flat(int area) {
+    public Flat(double area) {
         this(area, DEF_ROOM);
     }
 

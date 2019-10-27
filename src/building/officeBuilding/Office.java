@@ -9,9 +9,12 @@ public class Office implements Space,Cloneable {
     private int room;
     private static final int ROOM_DEF = 1;
 
-    public Office(int area, int room) {
+    public Office(double area, int room) {
         this.area = area;
         this.room = room;
+    }
+    public Office(double area) {
+        this(area,ROOM_DEF);
     }
 
     public Office() {
