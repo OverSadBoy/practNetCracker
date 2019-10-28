@@ -1,14 +1,16 @@
 package building;
 
-public interface Space {
-    public int getRoom();
+public interface Space  extends Comparable<Space>{
+    int getRoom();
 
-    public void setRoom(int room);
+    void setRoom(int room);
 
-    public double getArea();
+    double getArea();
 
-    public void setArea(int area);
+    void setArea(int area);
 
-    public Object clone() throws CloneNotSupportedException;
+    Object clone() throws CloneNotSupportedException;
+
+    int compareTo(Space space);
 
 }

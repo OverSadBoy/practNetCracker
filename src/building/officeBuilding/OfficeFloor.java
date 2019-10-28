@@ -2,6 +2,7 @@ package building.officeBuilding;
 
 import building.Floor;
 import building.Space;
+import building.sup.FloorIterator;
 import exception.SpaceIndexOutOfBoundsException;
 import lList.CLList;
 import lList.Item;
@@ -136,15 +137,19 @@ public class OfficeFloor implements Floor, Cloneable {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        Object res = super.clone();
-        for (int i = 1; i <= getSpaceNum(); i++) {
-            ((Floor) res).addSpace(i, (Space) getSpace(i).clone());
-        }
-        return res;
+        Space[] space = new Space[getSpaceNum()];
+        for (int i = 0; i < getSpaceNum(); i++)
+            space[i] = (Space) getSpace(i).clone();
+        return new OfficeFloor(space);
     }
 
     @Override
     public Iterator iterator() {
-        return null;
+        return new FloorIterator(this);
+    }
+
+    @Override
+    public int compareTo(Floor floor) {
+        return Integer.compare(getSpaceNum(), floor.getSpaceNum());
     }
 }

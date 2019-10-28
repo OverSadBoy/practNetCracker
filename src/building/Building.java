@@ -2,33 +2,33 @@ package building;
 
 import lList.CLList;
 
-public interface Building {
+public interface Building  extends  Iterable<Floor>{
 
-    public int getFloorsNum();
+    int getFloorsNum();
 
-    public int getSpacesNum();
+    int getSpacesNum();
 
-    public int getSpacesArea();
+    int getSpacesArea();
 
-    public int getSpacesRoom();
+    int getSpacesRoom();
 
-    public Floor[] getFloors();
+    Floor[] getFloors();
 
-    public Floor getFloor(int num);
+    Floor getFloor(int num);
 
-    public void setFloor(int num, Floor floor);
+    void setFloor(int num, Floor floor);
 
-    public Space getSpace(int num);
+    Space getSpace(int num);
 
-    public void setSpace(int num, Space space);
+    void setSpace(int num, Space space);
 
-    public void addSpace(int num, Space space);
+    void addSpace(int num, Space space);
 
-    public void deleteSpace(int num);
+    void deleteSpace(int num);
 
-    public Space[] getSortSpace();
+    Space[] getSortSpace();
 
-    public Space getBestSpace();
+    Space getBestSpace();
 
-    public Object clone() throws CloneNotSupportedException;
+    Object clone() throws CloneNotSupportedException;
 }

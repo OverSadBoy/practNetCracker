@@ -10,6 +10,7 @@ import building.officeBuilding.OfficeBuilding;
 import building.officeBuilding.OfficeFloor;
 
 import java.io.*;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Buildings {
@@ -188,4 +189,31 @@ public class Buildings {
         }
         return result;
     }
+
+    public <T extends Comparable<T>> T[] getSortArrayMax(T[] t) {
+        for (int i = 0, minIndex = i; i < t.length; i++) {
+            for (int j = i + 1; j < t.length; j++) {
+                if (t[j].compareTo(t[minIndex]) < 0)
+                    minIndex = j;
+            }
+            T swapBuf = t[i];
+            t[i] = t[minIndex];
+            t[minIndex] = swapBuf;
+        }
+        return t;
+    }
+    public <T extends Comparable<T>> T[] getSortArrayMin(T[] t,java.util.Comparator comparator) {
+        for (int i = 0, minIndex = i; i < t.length; i++) {
+            for (int j = i + 1; j < t.length; j++) {
+                if (comparator.compare(t[j],t[minIndex])<0)
+                    minIndex = j;
+            }
+            T swapBuf = t[i];
+            t[i] = t[minIndex];
+            t[minIndex] = swapBuf;
+        }
+        return t;
+    }
+
+
 }

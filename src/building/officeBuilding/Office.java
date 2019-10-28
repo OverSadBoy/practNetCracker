@@ -2,7 +2,7 @@ package building.officeBuilding;
 
 import building.Space;
 
-public class Office implements Space,Cloneable {
+public class Office implements Space, Cloneable {
 
     private double area;
     private static final int AREA_DEF = 250;
@@ -13,8 +13,9 @@ public class Office implements Space,Cloneable {
         this.area = area;
         this.room = room;
     }
+
     public Office(double area) {
-        this(area,ROOM_DEF);
+        this(area, ROOM_DEF);
     }
 
     public Office() {
@@ -49,17 +50,22 @@ public class Office implements Space,Cloneable {
 
     @Override
     public int hashCode() {
-        StringBuilder roomStr = new StringBuilder(Integer.toString(this.room,2)).reverse();
-        roomStr.delete(3,roomStr.length());
-        StringBuilder areaStr = new StringBuilder(Integer.toString((int)this.area,2)).reverse();
-        areaStr.delete(3,areaStr.length());
+        StringBuilder roomStr = new StringBuilder(Integer.toString(this.room, 2)).reverse();
+        roomStr.delete(3, roomStr.length());
+        StringBuilder areaStr = new StringBuilder(Integer.toString((int) this.area, 2)).reverse();
+        areaStr.delete(3, areaStr.length());
         byte room = Byte.parseByte(roomStr.toString());
         byte area = Byte.parseByte(areaStr.toString());
-        return  room ^ area;
+        return room ^ area;
     }
 
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    @Override
+    public int compareTo(Space space) {
+        return Double.compare(this.area, space.getArea());
     }
 }

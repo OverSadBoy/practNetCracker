@@ -6,7 +6,7 @@ import building.Space;
 
 import java.io.Serializable;
 
-public class Dwelling implements Building, Serializable,Cloneable {
+public class Dwelling implements Building, Serializable, Cloneable {
     private Floor[] dwellingFloors;
 
     public Dwelling(int floorNum, int[] numFlatForFloor) {
@@ -133,7 +133,7 @@ public class Dwelling implements Building, Serializable,Cloneable {
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < getFloorsNum(); i++) {
             str.append(getFloor(i));
-            if (i < getFloorsNum()-1)
+            if (i < getFloorsNum() - 1)
                 str.append(", ");
         }
         return "Dwelling" + "(" + getFloorsNum() + ", " + str + ")";
@@ -161,10 +161,10 @@ public class Dwelling implements Building, Serializable,Cloneable {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        Object res = super.clone();
-        for (int i = 0; i < getFloorsNum(); i++) {
-            ((Building) res).setFloor(i, (Floor) getFloor(i).clone());
-        }
-        return res;
+        Object clone = super.clone();
+        Floor[] floors = new Floor[getFloorsNum()];
+        for (int i = 0; i < getFloorsNum(); i++)
+            floors[i] = (Floor) ((Building)clone).getFloor(i).clone();
+        return new Dwelling(floors);
     }
 }

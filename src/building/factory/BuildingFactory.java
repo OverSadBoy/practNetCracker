@@ -6,15 +6,15 @@ import building.Space;
 
 public interface BuildingFactory {
 
-    public Space createSpace(double area);
+    Space createSpace(double area);
 
-    public Space createSpace(int roomsCount, double area);
+    Space createSpace(int roomsCount, double area);
 
-    public Floor createFloor(int spacesCount);
+    Floor createFloor(int spacesCount);
 
-    public Floor createFloor(Space[] spaces);
+    Floor createFloor(Space[] spaces);
 
-    public Building createBuilding(int floorsCount, int[] spacesCounts);
+    Building createBuilding(int floorsCount, int[] spacesCounts);
 
-    public Building createBuilding(Floor[] floors);
+    Building createBuilding(Floor[] floors);
 }

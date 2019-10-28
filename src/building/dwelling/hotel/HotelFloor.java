@@ -52,8 +52,9 @@ public class HotelFloor extends DwellingFloor {
     public int hashCode() {
         int result = 0;
         Integer spacesNum = getSpaceNum();
+        Integer star = getStar();
         for (int i = 0; i < spacesNum; i++) {
-            result += spacesNum.byteValue() ^ getSpace(i).hashCode();
+            result += star.byteValue() ^ spacesNum.byteValue() ^ getSpace(i).hashCode();
         }
         return result;
     }

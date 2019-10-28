@@ -2,6 +2,7 @@ package building.dwelling;
 
 import building.Floor;
 import building.Space;
+import building.sup.FloorIterator;
 
 import java.util.Iterator;
 
@@ -119,23 +120,27 @@ public class DwellingFloor implements Floor, Cloneable {
     public int hashCode() {
         int result = 0;
         Integer spacesNum = getSpaceNum();
-        for (int i = 0; i < spacesNum; i++) {
+        for (int i = 0; i < spacesNum; i++)
             result += spacesNum.byteValue() ^ getSpace(i).hashCode();
-        }
         return result;
     }
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        Object res = super.clone();
-        for (int i = 0; i < getSpaceNum(); i++) {
-            ((Floor) res).addSpace(i, (Space) getSpace(i).clone());
-        }
-        return res;
+        Object clone = super.clone();
+        Space[] space = new Space[getSpaceNum()];
+        for (int i = 0; i < getSpaceNum(); i++)
+            space[i] = (Space) ((Floor) clone).getSpace(i).clone();
+        return new DwellingFloor(space);
     }
 
     @Override
     public Iterator iterator() {
-        return new building.sup.Iterator<DwellingFloor>();
+        return new FloorIterator(this);
+    }
+
+    @Override
+    public int compareTo(Floor floor) {
+        return Integer.compare(getSpaceNum(), floor.getSpaceNum());
     }
 }

@@ -2,7 +2,7 @@ package building.dwelling;
 
 import building.Space;
 
-public class Flat implements Space,Cloneable {
+public class Flat implements Space, Cloneable {
     private double area;
     private int room;
     private static final int DEF_AREA = 50;
@@ -65,5 +65,10 @@ public class Flat implements Space,Cloneable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    @Override
+    public int compareTo(Space space) {
+        return Double.compare(this.area, space.getArea());
     }
 }

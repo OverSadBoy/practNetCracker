@@ -1,27 +1,29 @@
 package building;
 
 
-public interface Floor {
+public interface Floor extends Iterable<Space>,Comparable<Floor>{
 
-    public int getSpaceNum();
+    int getSpaceNum();
 
-    public int getAreas();
+    int getAreas();
 
-    public int getRooms();
+    int getRooms();
 
-    public Space[] getSpaces();
+    Space[] getSpaces();
 
-    public Space getSpace(int num);
+    Space getSpace(int num);
 
-    public void setSpace(int num, Space space);
+    void setSpace(int num, Space space);
 
-    public void addSpace(int num, Space space);
+    void addSpace(int num, Space space);
 
-    public void deleteSpace(int num);
+    void deleteSpace(int num);
 
-    public Space getBestSpace();
+    Space getBestSpace();
 
-    public Object clone() throws CloneNotSupportedException;
+    Object clone() throws CloneNotSupportedException;
 
     java.util.Iterator iterator();
+
+    int compareTo(Floor floor);
 }
