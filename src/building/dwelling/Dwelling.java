@@ -3,6 +3,7 @@ package building.dwelling;
 import building.Building;
 import building.Floor;
 import building.Space;
+import building.sup.BuildingIterator;
 import building.sup.FloorIterator;
 
 import java.io.Serializable;
@@ -171,4 +172,8 @@ public class Dwelling implements Building, Serializable, Cloneable {
     }
 
 
+    @Override
+    public Iterator<Floor> iterator() {
+        return new BuildingIterator(this);
+    }
 }

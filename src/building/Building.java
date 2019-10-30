@@ -2,7 +2,7 @@ package building;
 
 import lList.CLList;
 
-public interface Building { //extends  Iterable<Floor>{
+public interface Building extends  Iterable<Floor>{
 
     int getFloorsNum();
 
