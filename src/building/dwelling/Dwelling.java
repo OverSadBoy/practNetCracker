@@ -3,8 +3,10 @@ package building.dwelling;
 import building.Building;
 import building.Floor;
 import building.Space;
+import building.sup.FloorIterator;
 
 import java.io.Serializable;
+import java.util.Iterator;
 
 public class Dwelling implements Building, Serializable, Cloneable {
     private Floor[] dwellingFloors;
@@ -167,4 +169,6 @@ public class Dwelling implements Building, Serializable, Cloneable {
             floors[i] = (Floor) ((Building)clone).getFloor(i).clone();
         return new Dwelling(floors);
     }
+
+
 }

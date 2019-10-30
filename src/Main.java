@@ -6,6 +6,8 @@ import building.officeBuilding.Office;
 import building.officeBuilding.OfficeBuilding;
 import building.officeBuilding.OfficeFloor;
 import building.sup.PlacementExchanger;
+import building.threads.Cleaner;
+import building.threads.Repairer;
 import exception.*;
 
 public class Main {
@@ -54,6 +56,12 @@ public class Main {
         }
         System.out.println(gg.toString());
 
+        Cleaner cleaner = new Cleaner(new DwellingFloor(30));
+        Repairer repairer = new Repairer(new DwellingFloor(30));
+        repairer.setPriority(Thread.MAX_PRIORITY);
+
+        cleaner.start();
+        repairer.start();
         /*Flat flat = new Flat(55, 66);
         Flat flat2 = new Flat(55, 32);
         System.out.println(flat.toString());
