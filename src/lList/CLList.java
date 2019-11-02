@@ -1,7 +1,7 @@
 package lList;
 
-import building.officeBuilding.Office;
-import building.Space;
+import buildings.officeBuilding.Office;
+import buildings.Space;
 import exception.SpaceIndexOutOfBoundsException;
 
 public class CLList {

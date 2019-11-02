@@ -1,6 +1,6 @@
 package lList;
 
-        import building.Floor;
+        import buildings.Floor;
 
 public class DoubleItem {
     public Floor data;

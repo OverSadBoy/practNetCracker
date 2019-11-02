@@ -1,6 +1,6 @@
 package lList;
 
-import building.Space;
+import buildings.Space;
 
 public class Item {
     public Space data;

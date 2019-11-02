@@ -1,82 +1,20 @@
-import building.*;
-import building.dwelling.Dwelling;
-import building.dwelling.DwellingFloor;
-import building.dwelling.Flat;
-import building.officeBuilding.Office;
-import building.officeBuilding.OfficeBuilding;
-import building.officeBuilding.OfficeFloor;
-import building.sup.PlacementExchanger;
-import building.threads.Cleaner;
-import building.threads.Repairer;
-import exception.*;
+import buildings.dwelling.DwellingFloor;
+import buildings.sup.SemaphorePlace;
+import buildings.threads.SequentalCleaner;
+import buildings.threads.SequentalRepairer;
+
+import java.util.concurrent.Semaphore;
 
 public class Main {
 
     public static void main(String[] args) {
-        int[] office = {2, 3, 4};
-        OfficeBuilding officeBuilding = new OfficeBuilding(3, office);
-        officeBuilding.setSpace(0, new Office(111, 8));
-        officeBuilding.setSpace(1, new Office(222, 5));
-        officeBuilding.setSpace(2, new Office(333, 5));
-        officeBuilding.setSpace(3, new Office(444, 5));
-        officeBuilding.setSpace(4, new Office(555, 5));
-        officeBuilding.setSpace(5, new Office(666, 5));
-        officeBuilding.setSpace(6, new Office(777, 4));
-        officeBuilding.setSpace(7, new Office(888, 4));
-        officeBuilding.setSpace(8, new Office(999, 4));
 
-        int[] office1 = {2, 3, 4};
-        OfficeBuilding officeBuilding1 = new OfficeBuilding(3, office1);
-        officeBuilding1.setSpace(0, new Office(111, 8));
-        officeBuilding1.setSpace(1, new Office(45, 5));
-        officeBuilding1.setSpace(2, new Office(333, 5));
-        officeBuilding1.setSpace(3, new Office(444, 5));
-        officeBuilding1.setSpace(4, new Office(555, 5));
-        officeBuilding1.setSpace(5, new Office(666, 5));
-        officeBuilding1.setSpace(6, new Office(777, 4));
-        officeBuilding1.setSpace(7, new Office(888, 4));
-        officeBuilding1.setSpace(8, new Office(999, 4));
-
-        Dwelling dwelling = new Dwelling(3, office);
-        dwelling.setSpace(0, new Flat(234, 8));
-        dwelling.setSpace(1, new Flat(6547, 5));
-        dwelling.setSpace(2, new Flat(34, 5));
-        dwelling.setSpace(3, new Flat(6, 5));
-        dwelling.setSpace(4, new Flat(4, 5));
-        dwelling.setSpace(5, new Flat(6626, 5));
-        dwelling.setSpace(6, new Flat(3377, 4));
-        dwelling.setSpace(7, new Flat(888, 4));
-        dwelling.setSpace(8, new Flat(999, 4));
-
-        Dwelling gg = null;
-        try {
-            gg = (Dwelling) dwelling.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
+        DwellingFloor dwellingFloor = new DwellingFloor(30);
+        SemaphorePlace semaphorePlace = new SemaphorePlace();
+        Semaphore semaphore = new Semaphore(1);
+        for (int i = 0; i < dwellingFloor.getSpaceNum(); i++) {
+            new Thread(new SequentalCleaner(i,dwellingFloor,semaphore)).start();
+            new Thread(new SequentalRepairer(i,dwellingFloor,semaphore)).start();
         }
-        System.out.println(gg.toString());
-
-        Cleaner cleaner = new Cleaner(new DwellingFloor(30));
-        Repairer repairer = new Repairer(new DwellingFloor(30));
-        repairer.setPriority(Thread.MAX_PRIORITY);
-
-        cleaner.start();
-        repairer.start();
-        /*Flat flat = new Flat(55, 66);
-        Flat flat2 = new Flat(55, 32);
-        System.out.println(flat.toString());
-        Office officel1 = new Office(77, 4);
-        System.out.println(officel1.toString());
-        DwellingFloor dwellingFloor = new DwellingFloor(3);
-        System.out.println(dwellingFloor.toString());
-        OfficeFloor officeFloor = new OfficeFloor(56);
-        System.out.println(officeFloor.toString());
-        System.out.println(officeBuilding1.toString());
-        System.out.println(dwelling.toString());
-        System.out.println(officeBuilding.equals(officeBuilding1));
-
-        System.out.println(flat.hashCode());
-        System.out.println(Integer.toString(3,2));*/
-
     }
 }
