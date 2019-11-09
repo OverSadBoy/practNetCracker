@@ -2,34 +2,27 @@ package buildings.threads;
 
 import buildings.Floor;
 import buildings.Space;
+import buildings.sup.SemaphorePlace;
 
 import java.util.concurrent.Semaphore;
 
 public class SequentalCleaner implements Runnable {
     private Floor floor;
-    private Semaphore semaphore;
-    private int i;
-    private boolean ready = true;
+    private SemaphorePlace semaphore;
 
-    public SequentalCleaner(int i, Floor floor, Semaphore semaphore) {
+    public SequentalCleaner( Floor floor, SemaphorePlace semaphore) {
         this.floor = floor;
         this.semaphore = semaphore;
-        this.i = i;
     }
 
-    @Override
     public void run() {
-        try {
-            if (ready) {
-                semaphore.acquire();
-                Space[] spaces = floor.getSpaces();
-                System.out.println("Cleaning space number " + i + " with total area " + spaces[i].getArea() + " square meters.");
-                ready = false;
-                semaphore.release();
-            }
-        } catch (InterruptedException e) {
-            System.out.println("something wrong");
+        for (int i = 0; i<floor.getSpaceNum(); i++) {
+            semaphore.enter(floor);
+            System.out.println(String.format("Cleaning space number %d with total area %f square meters.",
+                    i, ((Space) floor.getSpace(i)).getArea()));
+            semaphore.leave(floor);
         }
+        System.out.println("Cleaner has stopped working");
     }
 }
 

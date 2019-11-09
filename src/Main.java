@@ -10,11 +10,9 @@ public class Main {
     public static void main(String[] args) {
 
         DwellingFloor dwellingFloor = new DwellingFloor(30);
-        SemaphorePlace semaphorePlace = new SemaphorePlace();
-        Semaphore semaphore = new Semaphore(1);
-        for (int i = 0; i < dwellingFloor.getSpaceNum(); i++) {
-            new Thread(new SequentalCleaner(i,dwellingFloor,semaphore)).start();
-            new Thread(new SequentalRepairer(i,dwellingFloor,semaphore)).start();
-        }
+        SemaphorePlace semaphorePlace = new SemaphorePlace(1);
+        new Thread(new SequentalRepairer(dwellingFloor, semaphorePlace)).start();
+        new Thread(new SequentalCleaner(dwellingFloor, semaphorePlace)).start();
     }
+
 }

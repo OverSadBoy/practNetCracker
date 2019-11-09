@@ -2,34 +2,26 @@ package buildings.threads;
 
 import buildings.Floor;
 import buildings.Space;
+import buildings.sup.SemaphorePlace;
 
 import java.util.concurrent.Semaphore;
 
 public class SequentalRepairer implements Runnable {
     private Floor floor;
-    private Semaphore semaphore;
-    private int i;
-    private boolean ready = true;
+    private SemaphorePlace semaphore;
 
-    public SequentalRepairer(int i,Floor floor, Semaphore semaphore) {
+    public SequentalRepairer(Floor floor, SemaphorePlace semaphore) {
         this.floor = floor;
         this.semaphore = semaphore;
-        this.i = i;
     }
 
-    @Override
     public void run() {
-        try {
-            if (ready) {
-                semaphore.acquire();
-                Space[] spaces = floor.getSpaces();
-                System.out.println("Repaired space number " + i + " with total area " + spaces[i].getArea() + " square meters.");
-                ready= false;
-                semaphore.release();
-
-            }
-        } catch (InterruptedException e) {
-            System.out.println("something wrong");
+        for (int i = 0; i<floor.getSpaceNum(); i++) {
+            semaphore.enter(floor);
+            System.out.println(String.format("Repairer space number %d with total area %f square meters.",
+                    i, ((Space) floor.getSpace(i)).getArea()));
+            semaphore.leave(floor);
         }
+        System.out.println("Repairer has stopped working");
     }
 }
