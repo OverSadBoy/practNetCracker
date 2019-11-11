@@ -23,7 +23,4 @@ public interface Floor extends Iterable<Space>,Comparable<Floor>{
 
     Object clone() throws CloneNotSupportedException;
 
-    java.util.Iterator iterator();
-
-    int compareTo(Floor floor);
 }

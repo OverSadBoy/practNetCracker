@@ -4,8 +4,6 @@ import buildings.Floor;
 import buildings.Space;
 import buildings.sup.SemaphorePlace;
 
-import java.util.concurrent.Semaphore;
-
 public class SequentalRepairer implements Runnable {
     private Floor floor;
     private SemaphorePlace semaphore;
@@ -17,10 +15,10 @@ public class SequentalRepairer implements Runnable {
 
     public void run() {
         for (int i = 0; i<floor.getSpaceNum(); i++) {
-            semaphore.enter(floor);
+            semaphore.acquire();
             System.out.println(String.format("Repairer space number %d with total area %f square meters.",
                     i, ((Space) floor.getSpace(i)).getArea()));
-            semaphore.leave(floor);
+            semaphore.release();
         }
         System.out.println("Repairer has stopped working");
     }

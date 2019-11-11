@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
 
         DwellingFloor dwellingFloor = new DwellingFloor(30);
-        SemaphorePlace semaphorePlace = new SemaphorePlace(1);
+        SemaphorePlace semaphorePlace = new SemaphorePlace(1,dwellingFloor);
         new Thread(new SequentalRepairer(dwellingFloor, semaphorePlace)).start();
         new Thread(new SequentalCleaner(dwellingFloor, semaphorePlace)).start();
     }

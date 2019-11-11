@@ -13,12 +13,12 @@ public class SynchronizedFloor implements Floor {
     }
 
     @Override
-    public int getSpaceNum() {
+    synchronized public int getSpaceNum() {
         return spaces.length;
     }
 
     @Override
-    public int getAreas() {
+    synchronized public int getAreas() {
         int allArea = 0;
         for (Space space : spaces) {
             allArea += space.getArea();
@@ -27,7 +27,7 @@ public class SynchronizedFloor implements Floor {
     }
 
     @Override
-    public int getRooms() {
+    synchronized public int getRooms() {
         int allRoom = 0;
         for (Space space : spaces) {
             allRoom += space.getRoom();
@@ -36,12 +36,12 @@ public class SynchronizedFloor implements Floor {
     }
 
     @Override
-    public Space[] getSpaces() {
+    synchronized public Space[] getSpaces() {
         return spaces;
     }
 
     @Override
-    public Space getSpace(int num) {
+     synchronized public Space getSpace(int num) {
         return spaces[num];
     }
 
@@ -98,7 +98,7 @@ public class SynchronizedFloor implements Floor {
     }
 
     @Override
-    public String toString() {
+    synchronized public String toString() {
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < getSpaceNum(); i++) {
             str.append(getSpace(i).toString());
@@ -109,7 +109,7 @@ public class SynchronizedFloor implements Floor {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    synchronized public boolean equals(Object obj) {
         boolean res = false;
         if (obj instanceof SynchronizedFloor && ((SynchronizedFloor) obj).getSpaceNum() == getSpaceNum())
             for (int i = 0; i < getSpaceNum(); i++, res = true)
@@ -119,7 +119,7 @@ public class SynchronizedFloor implements Floor {
     }
 
     @Override
-    public int hashCode() {
+    synchronized public int hashCode() {
         int result = 0;
         Integer spacesNum = getSpaceNum();
         for (int i = 0; i < spacesNum; i++)
@@ -128,7 +128,7 @@ public class SynchronizedFloor implements Floor {
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
+    synchronized public Object clone() throws CloneNotSupportedException {
         Object clone = super.clone();
         Space[] space = new Space[getSpaceNum()];
         for (int i = 0; i < getSpaceNum(); i++)
@@ -137,12 +137,12 @@ public class SynchronizedFloor implements Floor {
     }
 
     @Override
-    public Iterator iterator() {
+    synchronized public Iterator<Space> iterator() {
         return new FloorIterator(this);
     }
 
     @Override
-    public int compareTo(Floor floor) {
+    synchronized public int compareTo(Floor floor) {
         return Integer.compare(getSpaceNum(), floor.getSpaceNum());
     }
 }

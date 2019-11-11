@@ -11,6 +11,4 @@ public interface Space  extends Comparable<Space>{
 
     Object clone() throws CloneNotSupportedException;
 
-    int compareTo(Space space);
-
 }

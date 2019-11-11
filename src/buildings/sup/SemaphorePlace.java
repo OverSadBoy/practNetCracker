@@ -3,21 +3,21 @@ package buildings.sup;
 import buildings.Floor;
 
 public class SemaphorePlace {
-    private int curMax;
-    private int cur;
-    private Floor lock;
+    private int thrMax;
+    private int thrCount;
+    private Floor block;
 
-    public SemaphorePlace(int curMax) {
-        this.curMax = curMax;
+    public SemaphorePlace(int curMax,Floor floor) {
+        this.thrMax = curMax;
+        block = floor;
     }
 
-    public void enter(Floor floor) {
-        lock = floor;
-        synchronized (lock) {
-            cur++;
-            if (cur > curMax) {
+    public void acquire() {
+        synchronized (block) {
+            thrCount++;
+            if (thrCount > thrMax) {
                 try {
-                    lock.wait();
+                    block.wait();
                 } catch (InterruptedException e) {
                     System.out.println("Interrupted");
                 }
@@ -26,15 +26,10 @@ public class SemaphorePlace {
 
     }
 
-    public void leave(Floor floor) {
-        lock = floor;
-        synchronized (lock) {
-            cur--;
-            lock.notify();
+    public void release() {
+        synchronized (block) {
+            thrCount--;
+            block.notify();
         }
-
     }
-
-
-
 }
