@@ -164,7 +164,7 @@ public class Buildings {
         }
     }
 
-    public Building readBuilding(Scanner scanner) {
+    public static Building readBuilding(Scanner scanner) {
         Building result = null;
         if (scanner.hasNext()) {
             String[] s = scanner.next().split(" ");
