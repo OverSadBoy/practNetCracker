@@ -6,7 +6,7 @@ import java.net.ServerSocket;
 public class SerialServer {
     public static void main(String[] args) {
         try {
-            ServerSocket socket = new ServerSocket(5000);
+            ServerSocket socket = new ServerSocket(1234);
             System.out.println("Starting server..");
             while (true) {
                 int i = 1;

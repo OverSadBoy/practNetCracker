@@ -19,15 +19,15 @@ import java.util.Random;
 
 public class BinaryServer {
 
-    public static final int DWELLING_MULTIPLIER = 1000;
-    public static final int OFFICE_MULTIPLIER = 1500;
-    public static final int HOTEL_MULTIPLIER = 2000;
+    public static final int DWELLING_PRICE = 1000;
+    public static final int OFFICE_PRICE = 1500;
+    public static final int HOTEL_PRICE = 2000;
     public static final int SOCKET_CLOSE = -1;
     public static final int ARRESTED = -10;
 
     public static void main(String[] args) {
         try {
-            ServerSocket socket = new ServerSocket(5000);
+            ServerSocket socket = new ServerSocket(1234);
             System.out.println("Starting server...");
             Socket clientSocket = socket.accept();
             System.out.println("Client accepted");
@@ -79,13 +79,13 @@ public class BinaryServer {
     private static float evaluateBuilding(Building building) {
         float result = building.getSpacesArea();
         if (building instanceof Hotel) {
-            result *= HOTEL_MULTIPLIER;
+            result *= HOTEL_PRICE;
         }
         else if (building instanceof OfficeBuilding) {
-            result *= OFFICE_MULTIPLIER;
+            result *= OFFICE_PRICE;
         }
         else if (building instanceof Dwelling) {
-            result *= DWELLING_MULTIPLIER;
+            result *= DWELLING_PRICE;
         }
         else result = 0;
         return (isArrested()) ? ARRESTED : result;

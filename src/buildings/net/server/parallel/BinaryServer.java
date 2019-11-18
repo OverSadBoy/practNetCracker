@@ -7,7 +7,7 @@ public class BinaryServer {
 
     public static void main(String[] args) {
         try {
-            ServerSocket socket = new ServerSocket(5000);
+            ServerSocket socket = new ServerSocket(1234);
             System.out.println("Starting server..");
             //noinspection InfiniteLoopStatement
             while (true) {

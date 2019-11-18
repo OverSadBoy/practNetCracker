@@ -22,7 +22,7 @@ import static buildings.net.server.sequental.BinaryServer.*;
 public class SerialServer {
     public static void main(String[] args) {
         try {
-            ServerSocket socket = new ServerSocket(5000);
+            ServerSocket socket = new ServerSocket(1234);
             System.out.println("Starting server...");
             Socket clientSocket = socket.accept();
             System.out.println("Client accepted");
@@ -73,11 +73,11 @@ public class SerialServer {
     private static float evaluateBuilding(Building building) {
         float result = building.getSpacesArea();
         if (building instanceof Hotel) {
-            result *= HOTEL_MULTIPLIER;
+            result *= HOTEL_PRICE;
         } else if (building instanceof OfficeBuilding) {
-            result *= OFFICE_MULTIPLIER;
+            result *= OFFICE_PRICE;
         } else if (building instanceof Dwelling) {
-            result *= DWELLING_MULTIPLIER;
+            result *= DWELLING_PRICE;
         } else result = 0;
         return (isArrested()) ? ARRESTED : result;
     }

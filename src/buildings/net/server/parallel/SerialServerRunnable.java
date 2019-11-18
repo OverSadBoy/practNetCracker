@@ -20,6 +20,7 @@ import static buildings.net.server.sequental.BinaryServer.*;
 
 public class SerialServerRunnable implements Runnable {
     private Socket clientSocket;
+
     public SerialServerRunnable(Socket clientSocket) {
         this.clientSocket = clientSocket;
     }
@@ -45,8 +46,7 @@ public class SerialServerRunnable implements Runnable {
                         System.out.println("Got: " + building.getClass().getSimpleName());
                         if (evaluation != ARRESTED) {
                             System.out.println(String.format("The price of the building is: %f", evaluation));
-                        }
-                        else
+                        } else
                             throw new BuildingUnderArrestException();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -68,23 +68,20 @@ public class SerialServerRunnable implements Runnable {
         }
     }
 
-    private static boolean isArrested() {
-        Random random = new Random();
-        return (random.nextInt(100) < 10);
-    }
-
     private static float evaluateBuilding(Building building) {
         float result = building.getSpacesArea();
         if (building instanceof Hotel) {
-            result *= HOTEL_MULTIPLIER;
-        }
-        else if (building instanceof OfficeBuilding) {
-            result *= OFFICE_MULTIPLIER;
-        }
-        else if (building instanceof Dwelling) {
-            result *= DWELLING_MULTIPLIER;
-        }
-        else result = 0;
+            result *= HOTEL_PRICE;
+        } else if (building instanceof OfficeBuilding) {
+            result *= OFFICE_PRICE;
+        } else if (building instanceof Dwelling) {
+            result *= DWELLING_PRICE;
+        } else result = 0;
         return (isArrested()) ? ARRESTED : result;
+    }
+
+    private static boolean isArrested() {
+        Random random = new Random();
+        return (random.nextInt(100) < 10);
     }
 }

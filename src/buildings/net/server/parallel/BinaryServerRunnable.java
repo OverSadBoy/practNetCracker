@@ -68,23 +68,23 @@ public class BinaryServerRunnable implements Runnable {
         }
     }
 
-    private static boolean isArrested() {
-        Random random = new Random();
-        return (random.nextInt(100) < 10);
-    }
-
     private static float evaluateBuilding(Building building) {
         float result = building.getSpacesArea();
         if (building instanceof Hotel) {
-            result *= HOTEL_MULTIPLIER;
+            result *= HOTEL_PRICE;
         }
         else if (building instanceof OfficeBuilding) {
-            result *= OFFICE_MULTIPLIER;
+            result *= OFFICE_PRICE;
         }
         else if (building instanceof Dwelling) {
-            result *= DWELLING_MULTIPLIER;
+            result *= DWELLING_PRICE;
         }
         else result = 0;
         return (isArrested()) ? ARRESTED : result;
+    }
+
+    private static boolean isArrested() {
+        Random random = new Random();
+        return (random.nextInt(100) < 10);
     }
 }

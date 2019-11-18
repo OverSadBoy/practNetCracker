@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class SerialClient {
     public static void main(String[] args) throws SocketException, IOException {
-        Socket socket = new Socket("127.0.0.1", 5000);
+        Socket socket = new Socket("127.1.1.1", 1234);
         System.out.println("Connected to " + socket.getInetAddress() + ":" + socket.getPort());
         OutputStream out = socket.getOutputStream();
         try (FileReader reader = new FileReader("netBuildings.dat")) {
@@ -25,7 +25,7 @@ public class SerialClient {
             }
             inputReader.close();
         }
-        DataInputStream din = new DataInputStream(socket.getInputStream());
+        ObjectInputStream din = new ObjectInputStream(socket.getInputStream());
         FileWriter fw = new FileWriter("netOutput.txt");
         while (true) {
             if (din.available() > 0) {
