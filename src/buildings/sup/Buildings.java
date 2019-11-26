@@ -117,8 +117,8 @@ public class Buildings {
                 Space[] offices = new Space[floorRoomsCount];
                 for (int j = 0; j < floorRoomsCount; j++) {
                     int roomNum = Integer.parseInt(s[count++]);
-                    int area = Integer.parseInt(s[count++]);
-                    Space space = createSpace(area, roomNum);
+                    double area = Double.parseDouble(s[count++]);
+                    Space space = createSpace(roomNum, area);
                     offices[j] = space;
                 }
                 floors[i] = createFloor(offices);
