@@ -4,6 +4,7 @@ import buildings.Building;
 import buildings.Floor;
 import buildings.Space;
 import buildings.sup.BuildingIterator;
+import buildings.sup.Buildings;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -11,13 +12,13 @@ import java.util.Iterator;
 public class Dwelling implements Building, Serializable, Cloneable {
     private Floor[] dwellingFloors;
 
-    public Dwelling(int floorNum, int...numFlatForFloor) {
+    public Dwelling(int floorNum, int... numFlatForFloor) {
         dwellingFloors = new DwellingFloor[floorNum];
         for (int i = 0; i < dwellingFloors.length; i++)
             dwellingFloors[i] = new DwellingFloor(numFlatForFloor[i]);
     }
 
-    public Dwelling(Floor...dwellingFloor) {
+    public Dwelling(Floor... dwellingFloor) {
         this.dwellingFloors = dwellingFloor;
     }
 
@@ -124,18 +125,7 @@ public class Dwelling implements Building, Serializable, Cloneable {
                 k++;
             }
         }
-        for (int i = 0; i < spaceSort.length; i++) {
-            double maxArea = 0;
-            for (int j = i; j < spaceSort.length; j++) {
-                if (spaceSort[j].getArea() > maxArea) {
-                    maxArea = spaceSort[j].getArea();
-                    Space flat = spaceSort[i];
-                    spaceSort[i] = spaceSort[j];
-                    spaceSort[j] = flat;
-                }
-            }
-        }
-        return spaceSort;
+        return Buildings.getSortArrayMin(spaceSort, (o1, o2) -> Double.compare(((Space) o1).getArea(), ((Space) o2).getArea()));
     }
 
     @Override

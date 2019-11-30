@@ -4,12 +4,14 @@ import buildings.Building;
 import buildings.Floor;
 import buildings.Space;
 import buildings.sup.BuildingIterator;
+import buildings.sup.Buildings;
 import exception.FloorIndexOutOfBoundsException;
 import exception.SpaceIndexOutOfBoundsException;
 import lList.CDLList;
 import lList.DoubleItem;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Iterator;
 
 public class OfficeBuilding implements Building, Serializable, Cloneable {
@@ -27,14 +29,14 @@ public class OfficeBuilding implements Building, Serializable, Cloneable {
         list.deleteDoubleItem(num);
     }
 
-    public OfficeBuilding(int numFloor, int...numSpace) {
+    public OfficeBuilding(int numFloor, int... numSpace) {
         list = new CDLList(numFloor);
         for (int i = 0; i < numFloor; i++) {
             list.addItemEnd(new OfficeFloor(numSpace[i]));
         }
     }
 
-    public OfficeBuilding(Floor...floor) {
+    public OfficeBuilding(Floor... floor) {
         list = new CDLList();
         for (Floor value : floor) {
             list.addItemEnd(value);
@@ -153,18 +155,7 @@ public class OfficeBuilding implements Building, Serializable, Cloneable {
                 k++;
             }
         }
-        for (int i = 0; i < spaces.length; i++) {
-            double maxArea = 0;
-            for (int j = i; j < spaces.length; j++) {
-                if (spaces[j].getArea() > maxArea) {
-                    maxArea = spaces[j].getArea();
-                    Space flat = spaces[i];
-                    spaces[i] = spaces[j];
-                    spaces[j] = flat;
-                }
-            }
-        }
-        return spaces;
+        return Buildings.getSortArrayMin(spaces, (o1, o2) -> Double.compare(((Space) o1).getArea(), ((Space) o2).getArea()));
     }
 
     @Override
