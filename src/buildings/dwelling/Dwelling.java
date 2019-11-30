@@ -11,20 +11,22 @@ import java.util.Iterator;
 public class Dwelling implements Building, Serializable, Cloneable {
     private Floor[] dwellingFloors;
 
-    public Dwelling(int floorNum, int[] numFlatForFloor) {
+    public Dwelling(int floorNum, int...numFlatForFloor) {
         dwellingFloors = new DwellingFloor[floorNum];
         for (int i = 0; i < dwellingFloors.length; i++)
             dwellingFloors[i] = new DwellingFloor(numFlatForFloor[i]);
     }
 
-    public Dwelling(Floor[] dwellingFloor) {
+    public Dwelling(Floor...dwellingFloor) {
         this.dwellingFloors = dwellingFloor;
     }
 
+    @Override
     public int getFloorsNum() {
         return dwellingFloors.length;
     }
 
+    @Override
     public int getSpacesNum() {
         int allFlat = 0;
         for (Floor dwellingFloor : dwellingFloors) {
@@ -33,6 +35,7 @@ public class Dwelling implements Building, Serializable, Cloneable {
         return allFlat;
     }
 
+    @Override
     public int getSpacesArea() {
         int allFlatArea = 0;
         for (Floor dwellingFloor : dwellingFloors) {
@@ -41,6 +44,7 @@ public class Dwelling implements Building, Serializable, Cloneable {
         return allFlatArea;
     }
 
+    @Override
     public int getSpacesRoom() {
         int allFlatRoom = 0;
         for (Floor dwellingFloor : dwellingFloors) {
@@ -49,18 +53,22 @@ public class Dwelling implements Building, Serializable, Cloneable {
         return allFlatRoom;
     }
 
+    @Override
     public Floor[] getFloors() {
         return dwellingFloors;
     }
 
+    @Override
     public Floor getFloor(int num) {
         return dwellingFloors[num];
     }
 
+    @Override
     public void setFloor(int num, Floor dwellingFloor) {
         dwellingFloors[num] = dwellingFloor;
     }
 
+    @Override
     public Space getSpace(int num) {
         Space flatG = null;
         int numFlat = 0;
@@ -74,6 +82,7 @@ public class Dwelling implements Building, Serializable, Cloneable {
         return flatG;
     }
 
+    @Override
     public void setSpace(int num, Space space) {
         for (int i = 0, numFlat = 0; i < dwellingFloors.length; i++) {
             for (int j = 0; j < dwellingFloors[i].getSpaces().length; j++) {
@@ -84,6 +93,7 @@ public class Dwelling implements Building, Serializable, Cloneable {
         }
     }
 
+    @Override
     public void addSpace(int num, Space flat) {
         for (int i = 0, numFlat = 0; i < dwellingFloors.length; i++) {
             for (int j = 0; j < dwellingFloors[i].getSpaces().length; j++) {
@@ -94,6 +104,7 @@ public class Dwelling implements Building, Serializable, Cloneable {
         }
     }
 
+    @Override
     public void deleteSpace(int num) {
         for (int i = 0, numFlat = 0; i < dwellingFloors.length; i++) {
             for (int j = 0; j < dwellingFloors[i].getSpaces().length; j++) {
@@ -104,6 +115,7 @@ public class Dwelling implements Building, Serializable, Cloneable {
         }
     }
 
+    @Override
     public Space[] getSortSpace() {
         Space[] spaceSort = new Space[getSpacesNum()];
         for (int j = 0, k = 0; j < dwellingFloors.length; j++) {
@@ -126,6 +138,7 @@ public class Dwelling implements Building, Serializable, Cloneable {
         return spaceSort;
     }
 
+    @Override
     public Space getBestSpace() {
         return getSortSpace()[0];
     }
@@ -155,8 +168,8 @@ public class Dwelling implements Building, Serializable, Cloneable {
     public int hashCode() {
         int result = 0;
         Integer floorNum = getFloorsNum();
-        for (int i = 0; i < floorNum; i++) {
-            result += floorNum.byteValue() ^ getFloor(i).hashCode();
+        for (Floor dwellingFloor : dwellingFloors) {
+            result += floorNum.byteValue() ^ dwellingFloor.hashCode();
         }
         return result;
     }
@@ -166,7 +179,7 @@ public class Dwelling implements Building, Serializable, Cloneable {
         Object clone = super.clone();
         Floor[] floors = new Floor[getFloorsNum()];
         for (int i = 0; i < getFloorsNum(); i++)
-            floors[i] = (Floor) ((Building)clone).getFloor(i).clone();
+            floors[i] = (Floor) ((Building) clone).getFloor(i).clone();
         return new Dwelling(floors);
     }
 

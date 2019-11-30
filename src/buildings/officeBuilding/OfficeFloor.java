@@ -13,7 +13,7 @@ public class OfficeFloor implements Floor, Cloneable {
 
     private CLList list;
 
-    public OfficeFloor(Space[] offices) {
+    public OfficeFloor(Space...offices) {
         list = new CLList();
         for (Space value : offices) {
             list.addItemEnd(value);

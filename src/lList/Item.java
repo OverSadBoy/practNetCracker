@@ -16,5 +16,4 @@ public class Item {
         this.data = data;
         this.next = next;
     }
-
 }

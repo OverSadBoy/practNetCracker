@@ -15,14 +15,16 @@ public class DwellingFloor implements Floor, Cloneable {
             spaces[i] = new Flat();
     }
 
-    public DwellingFloor(Space[] spaces) {
+    public DwellingFloor(Space...spaces) {
         this.spaces = spaces;
     }
 
+    @Override
     public int getSpaceNum() {
         return spaces.length;
     }
 
+    @Override
     public int getAreas() {
         int allArea = 0;
         for (Space space : spaces) {
@@ -31,6 +33,7 @@ public class DwellingFloor implements Floor, Cloneable {
         return allArea;
     }
 
+    @Override
     public int getRooms() {
         int allRoom = 0;
         for (Space space : spaces) {
@@ -39,24 +42,26 @@ public class DwellingFloor implements Floor, Cloneable {
         return allRoom;
     }
 
+    @Override
     public Space[] getSpaces() {
         return spaces;
     }
 
+    @Override
     public Space getSpace(int num) {
         return spaces[num];
     }
 
+    @Override
     public void setSpace(int num, Space space) {
         spaces[num] = space;
     }
 
+    @Override
     public void addSpace(int num, Space space) {
         Space[] spacesSec = new Space[spaces.length + 1];
         if (num > spaces.length) {
-            for (int i = 0; i < spaces.length; i++) {
-                spacesSec[i] = spaces[i];
-            }
+            System.arraycopy(spaces, 0, spacesSec, 0, spaces.length);
             spacesSec[num] = space;
         } else
             for (int i = 0; i < spacesSec.length; i++) {
@@ -71,6 +76,7 @@ public class DwellingFloor implements Floor, Cloneable {
         spaces = spacesSec;
     }
 
+    @Override
     public void deleteSpace(int num) {
         Space[] spacesSec = new Space[spaces.length - 1];
         for (int i = 0; i < spacesSec.length; i++) {
@@ -83,13 +89,14 @@ public class DwellingFloor implements Floor, Cloneable {
         spaces = spacesSec;
     }
 
+    @Override
     public Space getBestSpace() {
         Space space = null;
         double bestArea = 0;
-        for (int i = 0; i < spaces.length; i++) {
-            if (spaces[i].getArea() > bestArea) {
-                bestArea = spaces[i].getArea();
-                space = spaces[i];
+        for (Space value : spaces) {
+            if (value.getArea() > bestArea) {
+                bestArea = value.getArea();
+                space = value;
             }
         }
         return space;
@@ -120,8 +127,8 @@ public class DwellingFloor implements Floor, Cloneable {
     public int hashCode() {
         int result = 0;
         Integer spacesNum = getSpaceNum();
-        for (int i = 0; i < spacesNum; i++)
-            result += spacesNum.byteValue() ^ getSpace(i).hashCode();
+        for (Space space: spaces)
+            result += spacesNum.byteValue() ^ space.hashCode();
         return result;
     }
 

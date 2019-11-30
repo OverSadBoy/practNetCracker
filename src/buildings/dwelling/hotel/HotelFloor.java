@@ -22,7 +22,7 @@ public class HotelFloor extends DwellingFloor {
         star = DEF_STAR;
     }
 
-    public HotelFloor(Space[] spaces) {
+    public HotelFloor(Space...spaces) {
         super(spaces);
         star = DEF_STAR;
     }

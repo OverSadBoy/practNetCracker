@@ -12,7 +12,7 @@ import lList.DoubleItem;
 import java.io.Serializable;
 import java.util.Iterator;
 
-public class OfficeBuilding implements Building, Serializable,Cloneable {
+public class OfficeBuilding implements Building, Serializable, Cloneable {
     private CDLList list;
 
     private DoubleItem getItem(int num) {
@@ -27,14 +27,14 @@ public class OfficeBuilding implements Building, Serializable,Cloneable {
         list.deleteDoubleItem(num);
     }
 
-    public OfficeBuilding(int numFloor, int[] numSpace) {
+    public OfficeBuilding(int numFloor, int...numSpace) {
         list = new CDLList(numFloor);
         for (int i = 0; i < numFloor; i++) {
             list.addItemEnd(new OfficeFloor(numSpace[i]));
         }
     }
 
-    public OfficeBuilding(Floor[] floor) {
+    public OfficeBuilding(Floor...floor) {
         list = new CDLList();
         for (Floor value : floor) {
             list.addItemEnd(value);

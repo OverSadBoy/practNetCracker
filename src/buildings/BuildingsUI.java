@@ -90,8 +90,6 @@ public class BuildingsUI extends JFrame {
             panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
             panel.setSize(300, 60);
             panel.setVisible(true);
-            //номер в здании, количество комнат, общая
-            //площадь.
             for (int j = 0; j < building.getFloor(i).getSpaceNum(); j++, k++) {
                 JButton button = new JButton(String.valueOf(k));
                 int finalI = i;
@@ -123,14 +121,8 @@ public class BuildingsUI extends JFrame {
         }
         try {
             UIManager.setLookAndFeel(s);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            JOptionPane.showConfirmDialog(component,"trouble which scheme");
         }
         SwingUtilities.updateComponentTreeUI(getContentPane());
     }

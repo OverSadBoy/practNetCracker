@@ -5,11 +5,11 @@ import buildings.Space;
 import buildings.dwelling.Dwelling;
 
 public class Hotel extends Dwelling {
-    public Hotel(int floorNum, int[] numFlatForFloor) {
+    public Hotel(int floorNum, int...numFlatForFloor) {
         super(floorNum, numFlatForFloor);
     }
 
-    public Hotel(Floor[] dwellingFloor) {
+    public Hotel(Floor...dwellingFloor) {
         super(dwellingFloor);
     }
 

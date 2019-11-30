@@ -22,18 +22,22 @@ public class Office implements Space, Cloneable {
         this(AREA_DEF, ROOM_DEF);
     }
 
+    @Override
     public int getRoom() {
         return room;
     }
 
+    @Override
     public void setRoom(int room) {
         this.room = room;
     }
 
+    @Override
     public double getArea() {
         return area;
     }
 
+    @Override
     public void setArea(int area) {
         this.area = area;
     }
